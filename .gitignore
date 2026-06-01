@@ -1,0 +1,3 @@
+__pycache__/
+*.pyc
+smart_city_model.pkl
