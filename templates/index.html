@@ -28,7 +28,16 @@
         * {
             box-sizing: border-box;
         }
+        select {
+            appearance: none;
+           -webkit-appearance: none;
+           -moz-appearance: none;
+        }
 
+        select option {
+            background: #1e293b;
+            color: #ffffff;
+        }
         body {
             margin: 0;
             min-height: 100vh;
@@ -368,17 +377,27 @@
         <div class="card">
             <div class="section-title">
                 <h2>Prediction Inputs</h2>
-                <span>Choose zone, hour and day</span>
+                <span>Choose city, hour and day</span>
             </div>
             <form method="POST" id="predictForm">
                 <div class="form-grid">
                     <div>
                         <label for="zoneInput" class="sr-only">Zone</label>
                         <select id="zoneInput" name="zone" required>
-                            <option value="" disabled selected>Select Zone</option>
-                            {% for key in ["Zone1","Zone2","Zone3","Zone4","Zone5","Zone6","Zone7","Zone8","Zone9","Zone10","Zone11","Zone12"] %}
-                                <option value="{{ key }}">{{ key }}</option>
-                            {% endfor %}
+                           <option value="" disabled selected>Select City</option>
+
+                            <option value="Zone1">Mumbai</option>
+                            <option value="Zone2">Delhi</option>
+                            <option value="Zone3">Kolkata</option>
+                            <option value="Zone4">Chennai</option>
+                            <option value="Zone5">Bengaluru</option>
+                            <option value="Zone6">Hyderabad</option>
+                            <option value="Zone7">Pune</option>
+                            <option value="Zone8">Ahmedabad</option>
+                            <option value="Zone9">Jaipur</option>
+                            <option value="Zone10">Lucknow</option>
+                            <option value="Zone11">Patna</option>
+                            <option value="Zone12">Surat</option>
                         </select>
                     </div>
                     <div>
@@ -391,14 +410,14 @@
                     </div>
                 </div>
                 <button type="submit" class="primary">Run Prediction</button>
-                <p class="note">Tip: Click a zone marker on the map to auto-fill the zone field.</p>
+                <p class="note">Tip: Click a city marker on the map to auto-fill the city field.</p>
             </form>
         </div>
 
         <div class="card map-card">
             <div class="section-title">
-                <h2>City Zone Map</h2>
-                <span>Click a marker to auto-fill zone</span>
+                <h2>City Map</h2>
+                <span>Click a marker to auto-fill city</span>
             </div>
             <div id="map"></div>
         </div>
@@ -582,7 +601,7 @@
     ];
 
     zones.forEach(function(item) {
-        var marker = L.marker(item.coords).addTo(map).bindPopup(item.zone + ' — ' + item.city);
+        var marker = L.marker(item.coords).addTo(map).bindPopup(item.city);
         marker.on('click', function() {
             autoPredict(item.zone, item.coords[0], item.coords[1], marker);
         });
